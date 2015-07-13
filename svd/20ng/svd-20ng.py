@@ -3,7 +3,7 @@ import numpy as np
 import scipy
 import scipy.sparse.linalg as la
 
-file_name = "D:/Kaggle/20Newsgroups/20newsgroups-words.tsv"
+file_name = "20newsgroups-words.tsv"
 
 f = open(file_name, 'r')
 docids = {} #index -> doc_id
@@ -26,9 +26,9 @@ for line in f:
     for i in range(2, len(features)):
         parts = features[i].split(":")
         score = float(parts[1])
-        norm += score #*score
+        norm += score*score
         
-    #norm = norm + 1.0 #np.sqrt(norm + 10.0)    
+    #norm = np.sqrt(norm)    
     for i in range(2, len(features)):
         parts = features[i].split(":")
         docid = parts[0]
@@ -45,15 +45,22 @@ f.close()
 data = csr_matrix((scores, (rows, cols)), shape=(row_id, len(docids)))
 print("shape of input data (num_docs * num_words) " + str(data.shape))
 
-#compute top 100 singular vectors
+#compute top 100 singular vectors (are those in reverse most significant are at higher indexes?)
+
 U, s, V = la.svds(data.T, k=100, ncv=None, tol=0, which='LM', v0=None, maxiter=None, return_singular_vectors=True)
 print("shape of U " + str(U.shape))
 print("shape of V " + str(V.shape))
 
-print_top_words_for_each_V = True
-plot_U = True
-plot_V = True
-write_most_similar_words_examples = True
+#np.savetxt('U.txt', U, delimiter='\t')
+
+#np.savetxt('V.txt', V, delimiter='\t')
+
+#np.savetxt('S.txt', s, delimiter='\t')
+
+print_top_words_for_each_V = False #True
+plot_U = False #True
+plot_V = False #True
+write_most_similar_words_examples = False #True
 
 if print_top_words_for_each_V:
     for r in range(0, 100):
@@ -128,8 +135,8 @@ if write_most_similar_words_examples:
             (k,v) = results[i]
             print(str(i) + ")" + words[k] + "\t" + str(v))  
             
-    word_nearest_neighbors('windows') #('stopping')
-    word_nearest_neighbors('jesus') #('stopping')
-    word_nearest_neighbors('congress') #('stopping')
+    word_nearest_neighbors('windows')
+    word_nearest_neighbors('jesus')
+    word_nearest_neighbors('congress')
     
             
