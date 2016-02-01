@@ -1,0 +1,33 @@
+
+
+apply plugin: 'maven'
+apply plugin: 'scala'
+apply plugin: 'idea'
+apply plugin: 'maven-publish'
+apply plugin: 'java-library-distribution'
+
+repositories {
+        mavenLocal() //use maven local for the latest version of streamlib and t-dunning's t-digest
+        mavenCentral()
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.11.4'
+}
+
+distributions {
+    main {
+        contents {
+            into('deploy') {
+                from(jar)
+            }
+        }
+    }
+}
+
+dependencies {
+    //add project specific dependencies such as: compile 'org.apache.lucene:lucene-core:3.6.0'
+}
+
+
+
