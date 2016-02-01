@@ -78,3 +78,45 @@ object TwentyNewsgroupsNgrams {
   }
 }
 
+/*
+Output is extracted 4grams that appear more than 50 times
+       and are sorted by frequency
+
+ax ax ax ax	90464.0
+ustar jrennie 0000000 0000000	18888.0
+0 ustar jrennie 0000000	18846.0
+jrennie 0000000 0000000 from	18038.0
+max ax ax ax	8276.0
+ax max ax ax	8210.0
+ax ax ax max	8186.0
+ax ax max ax	8122.0
+20news bydate train comp	2941.0
+20news bydate train rec	2393.0
+20news bydate train sci	2377.0
+i don t know	2114.0
+20news bydate test comp	1960.0
+20news bydate train talk	1956.0
+3 q 3 q	1748.0
+world nntp posting host	1594.0
+distribution world nntp posting	1594.0
+20news bydate test rec	1594.0
+20news bydate test sci	1583.0
+bydate train talk politics	1578.0
+q 3 q 3	1558.0
+tin version 1 1	1426.0
+x newsreader tin version	1426.0
+newsreader tin version 1	1426.0
+i don t think	1360.0
+20news bydate test talk	1305.0
+bydate train rec sport	1199.0
+bydate train comp sys	1170.0
+r g r g	1164.0
+edu organization university of	1101.0
+g9v g9v g9v g9v	1078.0
+comp os ms windows	1063.0
+bydate test talk politics	1053.0
+comp sys ibm pc	1044.0
+sys ibm pc hardware	1030.0
+g r g r	1024.0
+i would like to	1016.0
+ */
