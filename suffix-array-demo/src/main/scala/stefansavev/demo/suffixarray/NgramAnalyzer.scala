@@ -1,5 +1,7 @@
 package stefansavev.demo.suffixarray
 
+import sais.SuffixArraySort
+
 class NGramAnalyzer(input: Array[Int], int2String: Int => String, outputSep: String = " "){
   val inputLength = input.length
 
@@ -46,8 +48,22 @@ class NGramAnalyzer(input: Array[Int], int2String: Int => String, outputSep: Str
   //call sort
   sort()
 
+  def timed[R](msg: String, codeBlock: => R): R = {
+    val start = System.currentTimeMillis()
+    val result = codeBlock    // call-by-name
+    val end = System.currentTimeMillis()
+    val elapsed = end - start
+    val timeAsStr = if (elapsed >= 1000) (elapsed/1000.0 + " secs.") else (elapsed + " ms.")
+    println(s"Time for '${msg}' ${timeAsStr}")
+    result
+  }
+
   private def sort(): Unit = {
-    suffixArray = AdaptedStringSort.sort(this.input)
+    for(i <- 0 until 4) {
+      suffixArray = null
+      suffixArray = timed("suffix array sort", SuffixArraySort.sort(this.input, input.max + 1))
+      timed("adapted string sort", AdaptedStringSort.sort(this.input))
+    }
     lcp = computeLCP(suffixArray)
   }
 
