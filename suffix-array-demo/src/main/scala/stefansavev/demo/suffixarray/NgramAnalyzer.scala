@@ -59,9 +59,10 @@ class NGramAnalyzer(input: Array[Int], int2String: Int => String, outputSep: Str
   }
 
   private def sort(): Unit = {
-    for(i <- 0 until 4) {
+    val idLimit = input.max + 1
+    for(i <- 0 until 4) { //repeat to get more reliable timings
       suffixArray = null
-      suffixArray = timed("suffix array sort", SuffixArraySort.sort(this.input, input.max + 1))
+      suffixArray = timed("suffix array sort", SuffixArraySort.sort(this.input, idLimit))
       timed("adapted string sort", AdaptedStringSort.sort(this.input))
     }
     lcp = computeLCP(suffixArray)

@@ -6,7 +6,7 @@ package stefansavev.demo.suffixarray;
 public class AdaptedStringSort {
     static int stringLength(int[] input, int s) {
         int len = (input.length - s);
-        return len;
+        return Math.min(25, len); //putting a limit of 25, this means we can search for phrases upto length 25
     }
 
     static int charAt(int[] input, int offset, int pos) {
@@ -15,7 +15,7 @@ public class AdaptedStringSort {
 
     static int charOrNull(int[] input, int s, int pos) {
         if (pos >= stringLength(input, s))
-            return (char) 0;
+            return 0;
         return charAt(input, s, pos);
     }
 
